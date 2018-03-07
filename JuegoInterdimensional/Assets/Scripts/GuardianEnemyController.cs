@@ -2,40 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class GuardianEnemyController : MonoBehaviour {
 	
 	public Transform target;
 	public Transform initialPosition;
 	public GameObject player;
 	public float speed = 0.15f;
+	public float maxDistance = 10f;
+	public float minDistance = 5f;
 
 	private Vector3 start, end, actualDistance;
-	private float maxDistance = 10f;
-	private float minDistance = 2.5f;
 	private float actualMagnitude;
-	private float aux;
+	private Rigidbody2D rb2d;
 
 	// Use this for initialization
 	void Start () {
+		rb2d = GetComponent<Rigidbody2D> ();
+
 		if (target != null) {
 			target.parent = null;
 			start = initialPosition.position;
-			aux = initialPosition.position.y;
 			end = target.position;
 		}
 	}
 
 	void FixedUpdate() {
-
 		actualDistance = transform.position - player.transform.position;
 		actualMagnitude = actualDistance.magnitude;
 		float fixedSpeed = speed * Time.deltaTime;
-		Debug.Log (actualMagnitude);
 
 		if (actualMagnitude < maxDistance && actualMagnitude > minDistance) {
-			start = new Vector3 (initialPosition.position.x, aux, transform.position.z);
-			end = target.position;
 			transform.position = Vector3.MoveTowards (transform.position, player.transform.position, fixedSpeed);
+		}else if(actualMagnitude < maxDistance && actualMagnitude <= minDistance){
+			fixedSpeed = 0f;
 		}else {
 			if (target != null) {
 				transform.position = Vector3.MoveTowards (transform.position, target.position, fixedSpeed);
