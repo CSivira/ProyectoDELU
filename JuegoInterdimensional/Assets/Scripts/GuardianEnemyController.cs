@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
+public class GuardianEnemyController : MonoBehaviour {
 	
 	public Transform target;
 	public Transform initialPosition;
@@ -27,7 +27,6 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-
 		actualDistance = transform.position - player.transform.position;
 		actualMagnitude = actualDistance.magnitude;
 		float fixedSpeed = speed * Time.deltaTime;
