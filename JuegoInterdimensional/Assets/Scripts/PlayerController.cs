@@ -4,31 +4,37 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	private float speed = 0.15f;
+	private Vector2 move;
+    public float speed;
+    private Animator anim;
+    private Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
-		
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
-		if (Input.GetKey (KeyCode.LeftArrow)) {
-			transform.position = new Vector3 (transform.position.x - speed,transform.position.y,transform.position.z);
-		}
+	void Update () {
+       move = new Vector2(Input.GetAxis("Horizontal") * speed, Input.GetAxis("Vertical") * speed);
+       rb.velocity = move;
+        if (Input.GetAxis("Horizontal")==0  && Input.GetAxis("Vertical") == 0)
+        {
+            anim.SetBool("run", false);
+        }
+        else
+        {
+            anim.SetBool("run", true);
+        }
+        if(Input.GetAxis("Jump")!=0)
+        {
+            anim.SetBool("attack", true);
+        }
+    }
 
-		if (Input.GetKey (KeyCode.RightArrow)) {
-			transform.position = new Vector3 (transform.position.x + speed,transform.position.y,transform.position.z);
-
-		}
-
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			transform.position = new Vector3 (transform.position.x,transform.position.y + speed,transform.position.z);
-		}
-
-		if (Input.GetKey (KeyCode.DownArrow)) {
-			transform.position = new Vector3 (transform.position.x,transform.position.y - speed,transform.position.z);
-
-		}
-	}
+    public void finishAttack()
+    {
+        anim.SetBool("attack", false);
+    }
 }
