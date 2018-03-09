@@ -538,7 +538,7 @@ AnimationClip:
   - time: 0
     functionName: startAttack
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 4a937f82b3b1914488db5e09fdc252bb,
+    objectReferenceParameter: {fileID: 11500000, guid: 23db6d5f34ab6b148b1a5ed0463f1092,
       type: 3}
     floatParameter: 0
     intParameter: 0
@@ -546,7 +546,7 @@ AnimationClip:
   - time: 0.41666666
     functionName: finishAttack
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 4a937f82b3b1914488db5e09fdc252bb,
+    objectReferenceParameter: {fileID: 11500000, guid: 23db6d5f34ab6b148b1a5ed0463f1092,
       type: 3}
     floatParameter: 0
     intParameter: 0
