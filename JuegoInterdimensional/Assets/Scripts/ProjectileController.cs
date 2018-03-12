@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour {
 
-	public float speed = 5f;
-
-	private GameObject player;
-	private Rigidbody2D rb2d;
-	private Vector2 direction;
+	public float speed = 15f;
+	public Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
-		rb2d = GetComponent<Rigidbody2D> ();
-		player = GameObject.Find ("Player");
-		direction = player.transform.position;
+		rb = GetComponent<Rigidbody2D>();
+		rb.velocity = Vector3.left * speed;
 	}
-
+	
 	// Update is called once per frame
-	void FixedUpdate () {
-		rb2d.velocity = new Vector3 (1f,1f,1f) * speed;
+	void Update () {
+		
 	}
 }

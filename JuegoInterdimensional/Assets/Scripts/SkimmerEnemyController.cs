@@ -4,41 +4,47 @@ using UnityEngine;
 
 public class SkimmerEnemyController : MonoBehaviour {
 
-	public Transform target;
 	public GameObject player;
+	public GameObject weapon;
 	public float speed = 2f;
 	public float maxDistance = 10f;
 	public float minDistance = 4f;
-	public GameObject projectile;
+	public int count = 0;
 
 	private Vector3 actualDistance;
 	private float actualMagnitude;
-	private Rigidbody2D rb2d;
-	private float burst = 5f;
+	private float[] level;
+	private int actualLevel;
 
 	// Use this for initialization
 	void Start () {
-		rb2d = GetComponent<Rigidbody2D> ();
-		projectile = GameObject.Find ("Projectile");
-		target.parent = null;
+		weapon = GameObject.Find("Weapon");
 	}
 
 	void FixedUpdate() {
+		level = GameObject.Find("GameController").GetComponent<GameController> ().Lane;
+		actualLevel = player.GetComponent<PlayerController> ().actualLevel;
 		actualDistance = transform.position - player.transform.position;
 		actualMagnitude = actualDistance.magnitude;
 		float fixedSpeed = speed * Time.deltaTime;
 
-		if (actualMagnitude < maxDistance && actualMagnitude > minDistance) {
-			InvokeRepeating("CreateProjectile",0f,burst);
-		}else if (actualMagnitude < maxDistance && actualMagnitude < minDistance){
-			CancelInvoke ("CreateProjectile");
-			target.position = actualDistance;
-			transform.position = Vector3.MoveTowards (transform.position,target.position,fixedSpeed);
+		if (actualMagnitude < maxDistance && actualMagnitude >= minDistance) {
+			if (transform.position.y != level [actualLevel]) {
+				Vector3 actual = new Vector3 (transform.position.x, level[actualLevel], transform.position.z);
+				transform.position = Vector3.MoveTowards (transform.position, actual, fixedSpeed);
+			}else {
+				Vector3 actual = new Vector3 (player.transform.position.x, transform.position.y, transform.position.z);
+				transform.position = Vector3.MoveTowards (transform.position, actual, fixedSpeed);
+			}
 			Debug.Log (actualMagnitude);
-		}
-	}
+			if (count == 7) {
+				weapon.SendMessage ("ProjectileCreator");
+				count = 0;
+			} else
+				count++;
 
-	void CreateProjectile() {
-		Instantiate (projectile,transform.position,Quaternion.identity);
+		}else if (actualMagnitude < maxDistance && actualMagnitude < minDistance){
+			
+		}
 	}
 }
