@@ -4,9 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - enemy
-  - Jugador
-  - armaJugador
+  - JugadorCuerpo
+  - JugadorArma
+  - SoldadoCuerpo
+  - SoldadoArma
+  - TiradoCuerpo
+  - TiradorArma
+  - GuardianCuerpo
+  - GuardianArma
+  - Proyectil
+  - Borde
   layers:
   - Default
   - TransparentFX
@@ -43,7 +50,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Players
-    uniqueID: 2661203625
     locked: 0

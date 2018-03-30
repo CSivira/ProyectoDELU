@@ -428,7 +428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1420933736797090, guid: dc174a8d090fe6e4daf8dcad06043a8c, type: 2}
   skimmer: {fileID: 1913198050}
-  burst: 5
 --- !u!1 &425047940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1377,7 +1376,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1910028794
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1502,7 +1501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1913198047
 MonoBehaviour:
   m_ObjectHideFlags: 0
