@@ -4,94 +4,72 @@ using UnityEngine;
 
 public class SoldadoControl : MonoBehaviour {
 
-	public int vida = 50;
-	public int fuerza = 5;
-	public float velocidad = 1f;
-	public int distanciaMinima = 1;
-	public int distanciaMaxima = 8;
-	public float alturaAtaque = 0.5f;
+	public int vida = 0;
+	public int fuerza = 0;
+	public float velocidad = 0f;
+	public float alturaAtaque = 0f;
+	public float anchoAtaque = 0f;
+	public float radioPersecusion = 5;
+	public float radioAtaque = 1;
 
 	GameObject jugador;
 	Transform arma;
-	//Transform cuerpo;
-
-	Rigidbody2D rigido;
 	Animator animador;
-
 	Vector3 direccion;
-
+	Vector3 posicionInicial;
 	float distancia;
 	float velocidadReal = 0;
-
 	bool sentido = true;
 
-	void Start () {
+	void Awake () {
 		jugador = GameObject.Find ("Jugador");
 		arma = this.gameObject.transform.GetChild(1);
-		//cuerpo = this.gameObject.transform.GetChild(0);	
 		animador = GetComponent<Animator> ();
-		//rigido = GetComponent<Rigidbody2D> ();
+
+		//Capturando posicion inicial
+		posicionInicial = transform.position;
 	}
+		
+	void Update () {
+		// Velocidad y dirección
+		velocidadReal = velocidad;
+		direccion = transform.position - jugador.transform.position;
+		distancia = direccion.magnitude;
 
-	void FixedUpdate () {
-		velocidadReal = velocidad * Time.deltaTime;
-		//Debug.Log ("velocidadReal");
+		//Ataque
+		if (radioAtaque > distancia) {
+			//Atacar
+			velocidadReal = 0f;
 
-		if (jugador != null) {
-			direccion = transform.position - jugador.transform.position;
-			distancia = direccion.magnitude;
+		} else {
+			//Dejar de atacar
 		}
 
-		if (jugador != null && vida >= 0) {
+		//Muerte
+		if (vida <= 0) {
+			//Destroy (gameObject,0.5f);
+		}
 
+		//En espera
+		if (radioPersecusion < distancia) {
+			
+			//Volviendo a la posicion inicial
+			if (transform.position != posicionInicial) {
+				transform.position = Vector3.MoveTowards (transform.position, posicionInicial, velocidadReal);
+			} else {
+				velocidadReal = 0f;
+			}
+
+		//Persecusión
+		} else {
+			transform.position = Vector3.MoveTowards (transform.position, jugador.transform.position, velocidadReal);
+				
+			//Mirada
 			if (transform.position.x < jugador.transform.position.x && !sentido) {
 				Mirada ();
 			} else if (transform.position.x > jugador.transform.position.x && sentido){
 				Mirada ();
 			}
-
-
-			if (distanciaMinima > distancia) {
-				transform.position = Vector3.MoveTowards (transform.position, jugador.transform.position, velocidadReal * 0f);
-
-				Animacion ("Andando", false);
-				Animacion ("Quieto", true);
-				Animacion ("Golpeado", false);
-
-				//rigido.isKinematic = true;
-
-				/*if (transform.position.y > jugador.transform.position.y + alturaAtaque) {
-					Animacion ("Andando", true);
-					Reposicionar (0.02f, -0.01f);
-					DetenerAtaque ();
-				} else if(transform.position.y < jugador.transform.position.y - alturaAtaque){
-					Animacion ("Andando", true);
-					Reposicionar (0.02f, 0.01f);
-					DetenerAtaque ();
-				} else {*/
-					Animacion ("Andando", false);
-					Ataque ();
-				//}
-
-			} else {
-				transform.position = Vector3.MoveTowards (transform.position, jugador.transform.position, velocidadReal);
-
-				//rigido.isKinematic = false;
-
-				Animacion ("Quieto", false);
-				Animacion ("Andando", true);
-				Animacion ("Golpeado", false);
-
-				DetenerAtaque ();
-			}
-		} else if (vida < 0) {
-			Animacion ("Muerto", true);
-			Animacion ("Golpeado", false);
-
-			//rigido.isKinematic = true;
-
-			DetenerAtaque ();
-			Destroy (gameObject,3f);
 		}
 			
 	}
@@ -105,19 +83,12 @@ public class SoldadoControl : MonoBehaviour {
 
 	void Animacion(string animacion, bool accion) {
 		animador.SetBool (animacion,accion);
-
-		/*if (accion) {
-			Debug.Log (animacion);
-		}*/
 	}
 
 	void OnTriggerEnter2D(Collider2D otro) {
 		if (otro.gameObject.tag == "JugadorArma") {
 			if (jugador != null) {
 				vida -= jugador.GetComponent<JugadorControl> ().fuerza;
-
-				Animacion ("Golpeado", true);
-				Animacion ("Atacando", false);
 			}
 		}
 	}
@@ -127,21 +98,18 @@ public class SoldadoControl : MonoBehaviour {
 			Reposicionar (0f, 0f);
 		} else {
 			if (transform.position.y > otro.gameObject.transform.position.y) {
-				Reposicionar (0f, 0.01f);
+				Reposicionar (0f, 0.02f);
 			} else {
-				Reposicionar (0f, -0.01f);
+				Reposicionar (0f, -0.02f);
 			}
 
 			if (transform.position.x > otro.gameObject.transform.position.x) {
-				Reposicionar (0.01f, 0f);
+				Reposicionar (0.02f, 0f);
 			} else {
-				Reposicionar (-0.01f, 0f);
+				Reposicionar (-0.02f, 0f);
 			}
 		}
-
-		if (otro.gameObject.tag == "SoldadoCuerpo") {
-			velocidadReal = 0f;
-		}
+			
 	}
 
 	void Ataque(){
@@ -156,6 +124,12 @@ public class SoldadoControl : MonoBehaviour {
 
 	void Reposicionar(float avanceX, float avanceY) {
 		transform.position = new Vector3 (transform.position.x + avanceX, transform.position.y + avanceY, transform.position.z);
+	}
+
+	void OnDrawGizmosSelected() {
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere (transform.position,radioPersecusion);
+		Gizmos.DrawWireSphere (transform.position,radioAtaque);
 	}
 
 }
