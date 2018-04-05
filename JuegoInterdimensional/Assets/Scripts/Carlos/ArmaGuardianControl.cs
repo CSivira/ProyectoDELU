@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ArmaGuardianControl : MonoBehaviour {
 
-	Animator animador;
+	//Animator animador;
 
 	void Start(){
-		animador = GetComponent<Animator> ();
+		//animador = GetComponent<Animator> ();
 	}
 
 	void Ataque (bool accion) {
 		if (accion) {
-			animador.SetBool ("Ataque", true);
+			//animador.SetBool ("Ataque", true);
 		} else {
-			animador.SetBool ("Ataque", false);
+			//animador.SetBool ("Ataque", false);
 		}
 	}
 }

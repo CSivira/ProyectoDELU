@@ -11,21 +11,15 @@ public class EmisorControl : MonoBehaviour {
 	[Tooltip ("Llenar con las letras de la A-E, siendo A la primera posicion y E la ultima posicion del emisor. Se pueden repetir letras")]
 	public string[] secuencia;
 
-	private Transform[] posiciones = new Transform[5];
-	private Transform A;
-	private Transform B;
-	private Transform C;
-	private Transform D;
-	private Transform E;
+	public Transform[] posiciones = new Transform[5];
+	public Transform A;
+	public Transform B;
+	public Transform C;
+	public Transform D;
+	public Transform E;
 	private Transform posicion;
 
-	void Start() {
-		A = this.gameObject.transform.GetChild (0);
-		B = this.gameObject.transform.GetChild (1);
-		C = this.gameObject.transform.GetChild (2);
-		D = this.gameObject.transform.GetChild (3);
-		E = this.gameObject.transform.GetChild (4);
-
+	void Awake() {
 		posiciones = new Transform[5] {A,B,C,D,E};
 	}
 
@@ -54,5 +48,24 @@ public class EmisorControl : MonoBehaviour {
 				Instantiate (enemigo,posicion.position,Quaternion.identity);
 			}
 		}
+	}
+
+	void OnDrawGizmosSelected() {
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere (A.position,0.15f);
+		Gizmos.color = Color.blue;
+		Gizmos.DrawSphere (B.position,0.15f);
+		Gizmos.color = Color.red;
+		Gizmos.DrawSphere (C.position,0.15f);
+		Gizmos.color = Color.green;
+		Gizmos.DrawSphere (D.position,0.15f);
+		Gizmos.color = Color.magenta;
+		Gizmos.DrawSphere (E.position,0.15f);
+
+		Vector3 arriba = new Vector3 (transform.position.x,transform.position.y + 6f,transform.position.z);
+		Vector3 abajo = new Vector3 (transform.position.x,transform.position.y - 6f,transform.position.z);
+
+		Gizmos.color = Color.white;
+		Gizmos.DrawLine (abajo,arriba);
 	}
 }

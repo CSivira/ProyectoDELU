@@ -16,4 +16,12 @@ public class DetectorControl : MonoBehaviour {
 			Destroy (gameObject);
 		}
 	}
+
+	void OnDrawGizmosSelected() {
+		Vector3 arriba = new Vector3 (transform.position.x,transform.position.y + 6f,transform.position.z);
+		Vector3 abajo = new Vector3 (transform.position.x,transform.position.y - 6f,transform.position.z);
+
+		Gizmos.color = Color.white;
+		Gizmos.DrawLine (abajo,arriba);
+	}
 }

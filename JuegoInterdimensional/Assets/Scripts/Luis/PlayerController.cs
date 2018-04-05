@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     private Animator anim;
     private Rigidbody2D rb;
-    private SpriteRenderer sprite;
+    //private SpriteRenderer sprite;
     private bool faceLeft;
     public BoxCollider2D weaponColl;
 	public float[] level;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
+        //sprite = GetComponent<SpriteRenderer>();
         faceLeft = false;
         weaponColl.enabled = false;
 
