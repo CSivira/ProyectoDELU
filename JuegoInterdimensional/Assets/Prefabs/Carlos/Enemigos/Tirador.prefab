@@ -198,7 +198,6 @@ MonoBehaviour:
   proyectil: {fileID: 50853656138311442, guid: ed31d83fa40ddf34b93cb969c492dd0c, type: 2}
   rafaga: 30
   velocidadProyectil: 6
-  jugador: {fileID: 1631427425343154, guid: b51e59619c9d09f48b21d4650bc924a3, type: 2}
 --- !u!114 &114801697565082200
 MonoBehaviour:
   m_ObjectHideFlags: 1
