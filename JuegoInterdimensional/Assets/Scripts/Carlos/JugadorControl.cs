@@ -16,13 +16,11 @@ public class JugadorControl : MonoBehaviour {
 	GameObject cuerpo;
 	Rigidbody2D rigido;
 	Vector2 movimiento;
-
 	float velocidadReal;
-	bool sentido = true;
+	bool sentido = false;
 
 	void Start () {
 		arma = GameObject.FindGameObjectWithTag ("JugadorArma");
-		//cuerpo = GameObject.FindGameObjectWithTag ("JugadorCuerpo");
 		guardian = GameObject.Find ("Guardian");
 		soldado = GameObject.Find ("Soldado");
 		tirador = GameObject.Find ("Tirador");
@@ -34,8 +32,6 @@ public class JugadorControl : MonoBehaviour {
 		velocidadReal = Time.deltaTime * velocidad;
 		movimiento = new Vector2 (Input.GetAxis("Horizontal") * velocidadReal,Input.GetAxis("Vertical") * (velocidadReal / 1.5f));
 		rigido.velocity = movimiento;
-
-		Debug.Log (vida);
 
 		if (vida < 0) {
 			Debug.Log ("Destruir jugador");

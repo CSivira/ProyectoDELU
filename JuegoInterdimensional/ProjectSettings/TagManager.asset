@@ -9,6 +9,16 @@ TagManager:
   - armaJugador
   - Door
   - Enemigo
+  - TiradorArma
+  - TiradoCuerpo
+  - Proyectil
+  - JugadorCuerpo
+  - JugadorArma
+  - Borde
+  - SoldadoCuerpo
+  - SoldadoArma
+  - GuardianCuerpo
+  - GuardianArma
   layers:
   - Default
   - TransparentFX
@@ -18,8 +28,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Fondo
+  - Jugador
   - 
   - 
   - 

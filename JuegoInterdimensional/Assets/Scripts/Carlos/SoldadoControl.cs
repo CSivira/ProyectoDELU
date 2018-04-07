@@ -19,7 +19,7 @@ public class SoldadoControl : MonoBehaviour {
 	Vector3 posicionInicial;
 	float distancia;
 	float velocidadReal = 0;
-	bool sentido = true;
+	bool sentido = false;
 
 	void Awake () {
 		jugador = GameObject.Find ("Jugador");
@@ -47,15 +47,23 @@ public class SoldadoControl : MonoBehaviour {
 
 		//Muerte
 		if (vida <= 0) {
-			//Destroy (gameObject,0.5f);
+			Destroy (gameObject,1f);
 		}
 
 		//En espera
 		if (radioPersecusion < distancia) {
-			
+
 			//Volviendo a la posicion inicial
 			if (transform.position != posicionInicial) {
 				transform.position = Vector3.MoveTowards (transform.position, posicionInicial, velocidadReal);
+
+				//Mirada sin persecusion
+				if (transform.position.x < posicionInicial.x && !sentido) {
+					Mirada ();
+				} else if (transform.position.x > posicionInicial.x && sentido){
+					Mirada ();
+				}
+
 			} else {
 				velocidadReal = 0f;
 			}
@@ -63,13 +71,19 @@ public class SoldadoControl : MonoBehaviour {
 		//Persecusión
 		} else {
 			transform.position = Vector3.MoveTowards (transform.position, jugador.transform.position, velocidadReal);
-				
-			//Mirada
+
+			//Mirada en persecusion
 			if (transform.position.x < jugador.transform.position.x && !sentido) {
 				Mirada ();
 			} else if (transform.position.x > jugador.transform.position.x && sentido){
 				Mirada ();
 			}
+		}
+
+		if (velocidadReal != 0) {
+			Animacion ("Andando", true);
+		} else {
+			Animacion ("Andando", false);
 		}
 			
 	}
