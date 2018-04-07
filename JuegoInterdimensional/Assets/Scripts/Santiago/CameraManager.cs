@@ -24,7 +24,9 @@ public class CameraManager : MonoBehaviour
     {
         if (!jugadorCombatiendo)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, transformJugador.position + diferencia, ref velocidadActual, suavidadCamara);
+            Vector3 dest = transformJugador.position + diferencia;
+            dest = new Vector3(dest.x, 0f, -10f);
+            transform.position = Vector3.SmoothDamp(transform.position, dest, ref velocidadActual, suavidadCamara);
         }
         else
         {

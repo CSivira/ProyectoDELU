@@ -4,15 +4,9 @@ public class Player : MonoBehaviour
 {
     public float moveSpeed = 4f;
 
-    //private Rigidbody2D rb2D;
     private Vector3 movement;
     private float horizontalMovement;
     private float verticalMovement;
-
-    //private void Awake()
-    //{
-    //    rb2D = GetComponent<Rigidbody2D>();
-    //}
 
     private void Update()
     {
