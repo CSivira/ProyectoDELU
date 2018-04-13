@@ -141,7 +141,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1293305267975352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 1, z: 0.29882812}
+  m_LocalPosition: {x: 4.96, y: -3.2, z: 0.29882812}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4919655129481642}
@@ -169,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1290594991754204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -1, z: 0}
+  m_LocalPosition: {x: -2.43, y: -0.78, z: 0}
   m_LocalScale: {x: 1, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 4015990228134832}
@@ -234,7 +234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1175793102791878}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: -1, z: 0}
+  m_LocalPosition: {x: 6.88, y: -0.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4867552322882588}
@@ -283,14 +283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemigo: {fileID: 1834242131823604, guid: cda174201143ccd429e3acfb27d300e1, type: 2}
   secuencia:
-  - B
   - D
-  posiciones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - C
   A: {fileID: 4867552322882588}
   B: {fileID: 4814796539804392}
   C: {fileID: 4337446060933456}

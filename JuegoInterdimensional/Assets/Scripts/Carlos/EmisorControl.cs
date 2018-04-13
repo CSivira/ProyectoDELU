@@ -11,7 +11,7 @@ public class EmisorControl : MonoBehaviour {
 	[Tooltip ("Llenar con las letras de la A-E, siendo A la primera posicion y E la ultima posicion del emisor. Se pueden repetir letras")]
 	public string[] secuencia;
 
-	public Transform[] posiciones = new Transform[5];
+	private Transform[] posiciones = new Transform[5];
 	public Transform A;
 	public Transform B;
 	public Transform C;
