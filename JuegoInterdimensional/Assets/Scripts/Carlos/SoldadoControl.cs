@@ -19,7 +19,7 @@ public class SoldadoControl : MonoBehaviour {
 	Vector3 posicionInicial;
 	float distancia;
 	float velocidadReal = 0;
-	bool sentido = false;
+	bool sentido = true;
 
 	void Awake () {
 		jugador = GameObject.Find ("Jugador");
@@ -30,7 +30,7 @@ public class SoldadoControl : MonoBehaviour {
 		posicionInicial = transform.position;
 	}
 		
-	void Update () {
+	void FixedUpdate () {
 		// Velocidad y dirección
 		velocidadReal = velocidad;
 		direccion = transform.position - jugador.transform.position;
